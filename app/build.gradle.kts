@@ -29,20 +29,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "BASED_URL", "\"${project.findProperty("BASED_URL")}\"")
-            buildConfigField("String", "API_KEY", "\"${project.findProperty("API_KEY")}\"")
-            buildConfigField("String", "IMG_URL", "\"${project.findProperty("IMG_URL")}\"")
         }
-        debug {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-            buildConfigField("String", "BASED_URL", "\"${project.findProperty("DEV_BASED_URL")}\"")
-            buildConfigField("String", "API_KEY", "\"${project.findProperty("API_KEY")}\"")
-            buildConfigField("String", "IMG_URL", "\"${project.findProperty("IMG_URL")}\"")
-        }
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -53,7 +41,6 @@ android {
     }
     buildFeatures {
         compose = true
-        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"

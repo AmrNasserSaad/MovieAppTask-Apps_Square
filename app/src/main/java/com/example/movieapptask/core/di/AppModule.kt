@@ -1,13 +1,12 @@
 package com.example.movieapptask.core.di
 
 
-import com.example.movieapptask.BuildConfig
-import com.example.movieapptask.data.data_source.remote.MovieApiService
-import com.example.movieapptask.data.repository.GenresRepositoryImpl
-import com.example.movieapptask.domain.repository.GenresRepository
+import com.example.movieapptask.data.data_source.remote.MovieApi
+import com.example.movieapptask.data.repository.MovieRepositoryImpl
+import com.example.movieapptask.domain.repository.MovieRepository
+import com.example.movieapptask.utils.Const.BASE_URL
 import dagger.Module
 import dagger.Provides
-
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
@@ -34,7 +33,7 @@ object AppModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -42,15 +41,15 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): MovieApiService {
-        return retrofit.create(MovieApiService::class.java)
+    fun provideApiService(retrofit: Retrofit): MovieApi {
+        return retrofit.create(MovieApi::class.java)
     }
 
 
     @Provides
     @Singleton
-    fun provideGenresRepository(api: MovieApiService): GenresRepository {
-        return GenresRepositoryImpl(api)
+    fun provideMovieRepository(movieApi: MovieApi): MovieRepository {
+        return MovieRepositoryImpl(movieApi)
     }
 
 }
