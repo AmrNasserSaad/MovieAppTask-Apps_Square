@@ -1,44 +1,49 @@
 package com.example.movieapptask.presentation.home
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.example.movieapptask.domain.usescase.get_genres.GetGenresUseCase
-import com.example.movieapptask.utils.Resource
+import androidx.lifecycle.viewModelScope
+import com.example.movieapptask.data.data_source.remote.dto.Genre
+import com.example.movieapptask.data.data_source.remote.dto.Movie
+import com.example.movieapptask.domain.use_case.GetGenreListUseCase
+import com.example.movieapptask.domain.use_case.GetMoviesByGenreUseCase
+import com.example.movieapptask.utils.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getGenresUseCase: GetGenresUseCase
+
+    private val getGenreListUseCase: GetGenreListUseCase,
+    private val getMoviesByGenreUseCase: GetMoviesByGenreUseCase
+
 ) : ViewModel() {
 
-    private val _genreState = mutableStateOf(GenreListState())
-    val genreState: State<GenreListState> = _genreState
+    private val _genreState = MutableStateFlow<UIState<List<Genre>>>(UIState.Loading)
+    val genreState: StateFlow<UIState<List<Genre>>> = _genreState
+
+    private val _movieState = MutableStateFlow<UIState<List<Movie>>>(UIState.Loading)
+    val movieState: StateFlow<UIState<List<Movie>>> = _movieState
 
     init {
-        getGenres()
+        fetchGenres()
     }
 
-    private fun getGenres() {
-        getGenresUseCase().onEach { result ->
-            when (result) {
-                is Resource.Success -> {
-
-                    _genreState.value = GenreListState(genres = result.data?.genres ?: emptyList())
-                }
-
-                is Resource.Error -> {
-                    _genreState.value =
-                        GenreListState(error = result.message ?: "An unexpected error occurred")
-                }
-
-                is Resource.Loading -> {
-                    _genreState.value = GenreListState(isLoading = true)
-                }
+    private fun fetchGenres() {
+        viewModelScope.launch {
+            getGenreListUseCase().collect { result ->
+                _genreState.value = result
             }
+        }
+    }
 
+    fun fetchMoviesByGenre(genreId: String) {
+        viewModelScope.launch {
+            getMoviesByGenreUseCase(genreId).collect { result ->
+                _movieState.value = result
+            }
         }
     }
 

@@ -10,3 +10,4 @@ val Pink80 = Color(0xFFEFB8C8)
 
 val ButtonColor = Color(0xFF19A1BE)
 val BackgroundColor = Color(0xFFE0E0E0)
+val SearchColor = Color(0xFFE8E8E8)
