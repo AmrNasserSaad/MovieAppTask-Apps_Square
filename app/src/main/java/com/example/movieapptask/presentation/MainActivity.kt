@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.example.movieapptask.core.navigation.routes.app_router.AppNavigation
+import com.example.movieapptask.core.navigation.AppNavigation
 import com.example.movieapptask.presentation.ui.theme.MovieAppTaskTheme
 import dagger.hilt.android.AndroidEntryPoint
 

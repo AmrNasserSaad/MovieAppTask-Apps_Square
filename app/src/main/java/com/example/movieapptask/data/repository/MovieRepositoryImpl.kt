@@ -14,4 +14,6 @@ class MovieRepositoryImpl @Inject constructor(
 
     override suspend fun getMoviesByGenre(genreId: Int): List<Movie> = movieApi.getMoviesByGenre(genreIds = genreId.toString()).results
 
+    override suspend fun getMovieDetailsById(movieId: Int): Movie = movieApi.getMovieDetailsById(movieId = movieId)
+
 }

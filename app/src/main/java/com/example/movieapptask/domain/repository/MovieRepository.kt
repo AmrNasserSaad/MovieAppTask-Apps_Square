@@ -6,6 +6,7 @@ import com.example.movieapptask.data.data_source.remote.dto.Movie
 interface MovieRepository {
     suspend fun getGenres(): List<Genre>
     suspend fun getMoviesByGenre(genreId: Int): List<Movie>
+    suspend fun getMovieDetailsById(movieId : Int) : Movie
 }
 
 

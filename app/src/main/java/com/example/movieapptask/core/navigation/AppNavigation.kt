@@ -1,4 +1,4 @@
-package com.example.movieapptask.core.navigation.routes.app_router
+package com.example.movieapptask.core.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,6 +11,7 @@ import com.example.movieapptask.data.data_source.remote.dto.Movie
 import com.example.movieapptask.presentation.details.MovieDetailsScreen
 import com.example.movieapptask.presentation.home.HomeScreen
 import com.example.movieapptask.presentation.splash.SplashScreen
+import com.example.movieapptask.utils.Const.DETAILS_SCREEN
 import com.example.movieapptask.utils.Const.HOME_SCREEN
 import com.example.movieapptask.utils.Const.SPLASH_SCREEN
 import com.google.gson.Gson
@@ -27,12 +28,11 @@ fun AppNavigation(modifier: Modifier = Modifier) {
             HomeScreen(navController = navController)
         }
         composable(
-            route = "details_screen/{movie}",
-            arguments = listOf(navArgument("movie") { type = NavType.StringType })
+            route = "$DETAILS_SCREEN/{movieId}",
+            arguments = listOf(navArgument("movieId") { type = NavType.IntType })
         ) { backStackEntry ->
-            val movieJson = backStackEntry.arguments?.getString("movie")
-            val movie = Gson().fromJson(movieJson, Movie::class.java)
-            MovieDetailsScreen(navController = navController, movie = movie)
+            val movieId = backStackEntry.arguments?.getInt("movieId") ?: 0
+            MovieDetailsScreen(navController = navController, movieId = movieId)
         }
     }
 
