@@ -3,4 +3,7 @@
     <string name="onboarding">ONBOARDING</string>
     <string name="watch_everything_you_want_for_free">Watch everything you want \n for free!</string>
     <string name="search_for_a_content">Search for a content</string>
+    <string name="splash_image">Splash Image</string>
+    <string name="categories">Categories</string>
+    <string name="most_searched">Most Searched</string>
 </resources>

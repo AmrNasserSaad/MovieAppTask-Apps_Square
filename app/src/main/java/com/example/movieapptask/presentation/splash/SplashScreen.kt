@@ -18,17 +18,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.movieapptask.R
-import com.example.movieapptask.presentation.ui.theme.Axiforma
 import com.example.movieapptask.presentation.ui.theme.BackgroundColor
 import com.example.movieapptask.presentation.ui.theme.ButtonColor
+import com.example.movieapptask.presentation.ui.theme.titleLargeStyle
+import com.example.movieapptask.presentation.ui.theme.titleSmallStyle
 import com.example.movieapptask.utils.Const.HOME_SCREEN
 
 @Composable
@@ -45,7 +44,7 @@ fun SplashScreen(
     ) {
         Image(
             painter = painterResource(id = R.drawable.capture),
-            contentDescription = "Splash Image",
+            contentDescription = stringResource(R.string.splash_image),
             modifier = modifier
                 .fillMaxWidth()
                 .height(500.dp),
@@ -55,20 +54,13 @@ fun SplashScreen(
         Spacer(modifier = Modifier.height(24.dp))
         Text(
             text = stringResource(R.string.onboarding),
-            fontSize = 32.sp,
-            fontFamily = Axiforma,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black
+            style = titleLargeStyle
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = stringResource(R.string.watch_everything_you_want_for_free),
-            fontSize = 16.sp,
-            fontFamily = Axiforma,
-            fontWeight = FontWeight.Medium,
-            color = Color.Black,
-            textAlign = TextAlign.Center,
-            lineHeight = 24.sp
+            style = titleSmallStyle,
+            textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(28.dp))
 
@@ -80,9 +72,7 @@ fun SplashScreen(
         ) {
             Text(
                 text = "Get Started",
-                fontSize = 16.sp,
-                fontFamily = Axiforma,
-                fontWeight = FontWeight.Normal,
+                style = titleSmallStyle,
                 color = Color.White
             )
 

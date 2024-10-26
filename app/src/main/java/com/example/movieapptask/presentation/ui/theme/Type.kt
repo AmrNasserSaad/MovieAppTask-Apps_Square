@@ -1,6 +1,7 @@
 package com.example.movieapptask.presentation.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -31,4 +32,17 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     )
     */
+)
+val titleLargeStyle = TextStyle(
+    fontSize = 32.sp,
+    fontFamily = Axiforma,
+    fontWeight = FontWeight.Bold,
+    color = Color.Black,
+)
+val titleSmallStyle = TextStyle(
+    fontSize = 16.sp,
+    fontFamily = Axiforma,
+    fontWeight = FontWeight.Medium,
+    color = Color.Black,
+    lineHeight = 24.sp,
 )
